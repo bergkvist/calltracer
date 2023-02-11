@@ -11,7 +11,7 @@ fn main() {
         (author: "Tobias Bergkvist <tobias@bergkv.ist>")
         (about: "Rank function-trace locations according to evaluation time")
         (@arg prefix: +takes_value -p --prefix "Filter by specific location prefix (like file or folder name)")
-        (@arg coordinates: -c --coordinates "Include line and column numbers in trace output (function coordinates within a file)")
+        (@arg coordinates: -c --coordinates "Include line and column numbers in output (coordinates within file)")
         (@arg maxcount: +takes_value -m --maxcount "Limit number of top results")
         (@arg ascending: -a --ascending "Ascending order of results")
     ).get_matches();
