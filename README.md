@@ -27,11 +27,10 @@ OPTIONS:
 function-trace entered /my/file:2:10 at 1676000026006000443
 function-trace entered /my/file:2:17 at 1676000026006041983
 function-trace exited /my/file:2:17 at 1676000026006065614
-function-trace entered /my/other-file:11:30 at 1676000026134969573
-function-trace exited /my/other-file:11:30 at 1676000026134973013
+function-trace entered /my/other file:11:30 at 1676000026134969573
+function-trace exited /my/other file:11:30 at 1676000026134973013
 function-trace exited /my/file:2:10 at 1676000026135148774
 ```
-*Spaces in trace paths are not yet supported*
 
 ---
 ## Usage example

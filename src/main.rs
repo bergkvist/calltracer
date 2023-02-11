@@ -2,12 +2,12 @@ use std::io::{self, BufRead, Write};
 use std::collections::HashMap;
 use clap::clap_app;
 
-#[derive(Default, Clone, Copy)]
-struct FileTrace { depth: i64, enter_ns: i64, total_ns: i64 }
+#[derive(Default)]
+struct CallTrace { depth: i64, enter_ns: i64, total_ns: i64 }
 
 fn main() {
     let matches = clap_app!(calltracer =>
-        (version: "1.0.0")
+        (version: "1.0.1")
         (author: "Tobias Bergkvist <tobias@bergkv.ist>")
         (about: "Rank function-trace locations according to evaluation time")
         (@arg prefix: +takes_value -p --prefix "Filter by specific location prefix (like file or folder name)")
@@ -24,27 +24,30 @@ fn main() {
     let ascending = matches.is_present("ascending");
 
 
-    let mut traces: HashMap<String, FileTrace> = HashMap::new();
+    let mut traces: HashMap<String, CallTrace> = HashMap::new();
 
     for maybe_line in io::stdin().lock().lines() {
         let line = maybe_line.expect("Failed to read line from stdin");
-        if !line.starts_with("function-trace") {
+        if !line.trim_start().starts_with("function-trace") {
             continue;
         }
-        let space_split: Vec<&str> = line.split(" ").collect();
+        let space_split: Vec<&str> = line.trim().split(" ").collect();
         if space_split.len() < 5 {
             panic!("Invalid function-trace line: {}", line);
         }
         let direction = space_split[1];
-        let location = if coordinates { space_split[2] } else { space_split[2].split(":").collect::<Vec<_>>()[0] };
-        let time_ns = space_split[4];
+        let location = {
+            let part = space_split[2..space_split.len()-2].join(" ");
+            if coordinates { part } else { part.split(":").collect::<Vec<_>>()[0].into() }
+        };
+        let time_ns = space_split[space_split.len()-1];
 
         if !location.starts_with(prefix) {
             continue;
         }
 
 
-        let trace = traces.entry(location.into()).or_default();
+        let trace = traces.entry(location).or_default();
         if direction == "entered" {
             if trace.depth == 0 {
                 trace.enter_ns = time_ns.parse::<i64>().unwrap();
@@ -70,5 +73,4 @@ fn main() {
         writeln!(stdout, "{} {}", trace.total_ns, location).unwrap();
         i -= 1;
     }
-
 }
