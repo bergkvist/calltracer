@@ -61,7 +61,7 @@ $ <calls.trace calltracer --maxcount 10
 
 ```sh
 # Find out which functions inside of a specific file we spend the most time in
-<calls.trace calltracer --maxcount 10 --coordinates --prefix /nix/store/5n402azp0s9vza4rziv4z5y88v2cv1mq-nixpkgs/lib/customisation.nix
+$ <calls.trace calltracer --maxcount 10 --coordinates --prefix /nix/store/5n402azp0s9vza4rziv4z5y88v2cv1mq-nixpkgs/lib/customisation.nix
 
 15218517306 /nix/store/5n402azp0s9vza4rziv4z5y88v2cv1mq-nixpkgs/lib/customisation.nix:81:10
 15212528114 /nix/store/5n402azp0s9vza4rziv4z5y88v2cv1mq-nixpkgs/lib/customisation.nix:69:16
