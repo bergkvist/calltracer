@@ -3,7 +3,7 @@ Find out where the bottlenecks in your call traces are.
 
 
 ```
-calltracer 1.0
+calltracer 1.0.1
 Tobias Bergkvist <tobias@bergkv.ist>
 Rank function-trace locations according to evaluation time
 
@@ -23,6 +23,8 @@ OPTIONS:
 
 
 ## Supported Trace Format
+`function-trace <entered|exited> <file>:<coordinate> at <timestamp>`
+### Example:
 ```
 function-trace entered /my/file:2:10 at 1676000026006000443
 function-trace entered /my/file:2:17 at 1676000026006041983
