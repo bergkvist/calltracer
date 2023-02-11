@@ -20,7 +20,11 @@ OPTIONS:
     -m, --maxcount <maxcount>    Limit number of top results
     -p, --prefix <prefix>        Filter by specific location prefix (like file or folder name)
 ```
-
+## Installation
+```
+$ git clone git@github.com:bergkvist/calltracer
+$ cargo install --path calltracer
+```
 
 ## Supported Trace Format
 `function-trace <entered|exited> <file>:<coordinate> at <timestamp>`
